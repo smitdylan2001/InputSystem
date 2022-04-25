@@ -69,6 +69,7 @@ namespace UnityEngine.InputSystem.Editor
         private void BuildUI()
         {
             var stateContainer = new StateContainer(rootVisualElement, m_State);
+            stateContainer.StateChanged += OnStateChanged;
 
             var theme = EditorGUIUtility.isProSkin
                 ? AssetDatabase.LoadAssetAtPath<StyleSheet>(InputActionsEditorConstants.PackagePath + InputActionsEditorConstants.ResourcesPath + "/InputAssetEditorDark.uss")
@@ -79,6 +80,11 @@ namespace UnityEngine.InputSystem.Editor
             stateContainer.Initialize();
         }
 
+        private void OnStateChanged(InputActionsEditorState newState)
+        {
+            if (InputEditorUserSettings.autoSaveInputActionAssets)
+                SaveAsset(m_State.serializedObject);
+        }
 
         private InputActionAsset GetAssetFromDatabase()
         {
