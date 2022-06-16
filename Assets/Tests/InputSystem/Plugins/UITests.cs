@@ -2526,9 +2526,7 @@ internal class UITests : CoreTestsFixture
         Assert.That(players[1].eventSystem.currentSelectedGameObject, Is.SameAs(players[1].leftGameObject));
 
         Assert.That(players[0].leftChildReceiver.events, Is.Empty);
-        Assert.That(players[0].rightChildReceiver.events,
-            EventSequence(
-                OneEvent("type", EventType.Move))); // OnMove will still get called to *attempt* a move.
+        Assert.That(players[0].rightChildReceiver.events, Is.Empty);
 
         players[0].leftChildReceiver.events.Clear();
         players[0].rightChildReceiver.events.Clear();
@@ -3649,6 +3647,7 @@ internal class UITests : CoreTestsFixture
         scene.eventSystem.SendMessage("OnApplicationFocus", true);
 
         yield return null;
+        Assert.That(clicked, Is.False); // No spurious click events during focus changes
 
         // NOTE: We *do* need the pointer up to keep UI state consistent.
 
@@ -3670,6 +3669,25 @@ internal class UITests : CoreTestsFixture
         Assert.That(mouse.position.ReadValue(), Is.EqualTo(mousePosition));
         Assert.That(mouse.leftButton.isPressed, Is.False);
         Assert.That(clicked, Is.EqualTo(canRunInBackground));
+
+        // Ensure that losing and regaining focus doesn't cause the next click to be ignored
+        clicked = false;
+        runtime.PlayerFocusLost();
+        scene.eventSystem.SendMessage("OnApplicationFocus", false);
+        yield return null;
+
+        runtime.PlayerFocusGained();
+        scene.eventSystem.SendMessage("OnApplicationFocus", true);
+        yield return null;
+
+        Assert.That(clicked, Is.False);
+
+        Press(mouse.leftButton);
+        yield return null;
+        Release(mouse.leftButton);
+        yield return null;
+
+        Assert.That(clicked, Is.True);
     }
 
     [UnityTest]
