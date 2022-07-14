@@ -225,6 +225,8 @@ namespace UnityEngine.InputSystem.Layouts
                         flags &= ~Flags.IsNoisy;
                 }
             }
+            
+            public int jitterBits { get; internal set; }
 
             /// <summary>
             /// Get or set whether to mark the control as "synthetic".
@@ -1309,6 +1311,7 @@ namespace UnityEngine.InputSystem.Layouts
                 isModifyingExistingControl = isModifyingChildControlByPath,
                 isFirstDefinedInThisLayout = true,
                 isNoisy = isNoisy,
+                jitterBits = jitterBits,
                 dontReset = dontReset,
                 isSynthetic = isSynthetic,
                 arraySize = arraySize,

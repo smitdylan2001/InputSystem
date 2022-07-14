@@ -359,6 +359,8 @@ namespace UnityEngine.InputSystem
             }
         }
 
+        public int jitterBits => m_JitterBits;
+
         /// <summary>
         /// Whether the control is considered synthetic.
         /// </summary>
@@ -847,6 +849,7 @@ namespace UnityEngine.InputSystem
         internal int m_ChildCount;
         internal int m_ChildStartIndex;
         internal ControlFlags m_ControlFlags;
+        internal int m_JitterBits;
 
         ////REVIEW: store these in arrays in InputDevice instead?
         internal PrimitiveValue m_DefaultState;
