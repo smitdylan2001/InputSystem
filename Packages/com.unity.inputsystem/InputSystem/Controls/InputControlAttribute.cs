@@ -286,6 +286,18 @@ namespace UnityEngine.InputSystem.Layouts
         public int arraySize { get; set; }
 
         /// <summary>
+        /// Amount of lower bits to ignore when determining if control changed should mark device as updated.
+        /// </summary>
+        /// <value>Amount of bits.</value>
+        /// <remarks>
+        /// We determine if control was updated by checking if any of the control memory bits changed.
+        /// This property allows to ignore changes in specified amount of lower bits,
+        /// which allows to ignore jitter/noise in analogue controls.
+        /// </remarks>
+        /// <seealso cref="InputControl.noisy"/>
+        public int jitterBits { get; set; }
+
+        /// <summary>
         /// Display name to assign to the control.
         /// </summary>
         /// <value>Display name for the control.</value>

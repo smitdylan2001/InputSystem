@@ -1271,6 +1271,11 @@ namespace UnityEngine.InputSystem.Layouts
             if (attribute != null)
                 arraySize = attribute.arraySize;
 
+            // Determine jitter bits.
+            var jitterBits = 0;
+            if (attribute != null)
+                jitterBits = attribute.jitterBits;
+
             // Determine default state.
             var defaultState = new PrimitiveValue();
             if (attribute != null)
