@@ -11,7 +11,8 @@ however, it has to be formatted properly to pass verification tests.
 ## [Unreleased]
 
 ### Changed
-- Readded OnDisable() member to MultiplayerEventSystem which was previously removed from the API.
+- Readded OnDisable() member to MultiplayerEventSystem which was previously removed from the API
+- Improved the performance of InputAction.ReadValue and InputControl.ReadValue calls by introducing caching behaviour to input controls. Input controls now keep track of whether their underlying state has been changed and only read the value from the underlying state and apply processors when absolutely necessary.
 - Hide XR legacy HMD and controllers layouts from Editor UI dropdown.
 
 ### Fixed
