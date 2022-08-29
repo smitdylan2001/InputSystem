@@ -10,6 +10,31 @@ however, it has to be formatted properly to pass verification tests.
 
 ## [Unreleased]
 
+### Fixed
+- Added missing script and gizmo icon for `TrackedPoseDriver.cs` component ([case ISXB-262](https://issuetracker.unity3d.com/product/unity/issues/guid/ISXB-262)).
+- Fix for mitigating symptoms reported in ([case UUM-10774](https://issuetracker.unity3d.com/product/unity/issues/guid/UUM-10774) effectively avoiding reenabling mouse, pen or touch devices in `InputSystemPlugin.OnDestroy()` if currently quitting the editor. The fix avoids editor crashing if closed when Simulator Window is open. Note that the actual issue needs a separate fix in Unity and this package fix is only to avoid running into the issue.
+- Fixed an issue where Input Action name would not display correctly in Inspector if serialized as `[SerializedProperty]` within a class not derived from `MonoBehavior` ([case ISXB-124](https://issuetracker.unity3d.com/product/unity/issues/guid/ISXB-124).
+- Fix an issue where users could end up with the wrong device assignments when using the InputUser API directly and removing a user ([case ISXB-274](https://issuetracker.unity3d.com/product/unity/issues/guid/ISXB-231)).
+
+## [1.4.2] - 2022-08-12
+
+### Changed
+- Hide XR legacy HMD and controllers layouts from Editor UI dropdown.
+
+### Fixed
+- Fix UI sometimes ignoring the first mouse click event after losing and regaining focus ([case ISXB-127](https://issuetracker.unity3d.com/product/unity/issues/guid/ISXB-127).
+- Fixed issue when using MultiplayerEventSystems where the visual state of UI controls would change due to constant toggling of CanvasGroup.interactable on and off ([case ISXB-112](https://issuetracker.unity3d.com/product/unity/issues/guid/ISXB-112)).
+- Fixed an issue where the Input Action asset icon would not be visible during asset creation ([case ISXB-6](https://issuetracker.unity3d.com/product/unity/issues/guid/ISXB-6)).
+- Fixed DualSense low frequency motor speed being always set to min value.
+- Fixed an issue where `ReadUnprocessedValueFromState` in PoseControl always returning default values.
+- Fix Player 1's UI controls stop working after second player joins ([case ISXB-125](https://issuetracker.unity3d.com/product/unity/issues/guid/ISXB-125)))
+
+
+## [1.4.1] - 2022-05-30
+
+### Fixed
+- Fixed composite touchscreen controls were not firing an action if screen was touched before enabling the action ([case ISXB-98](https://jira.unity3d.com/browse/ISXB-98)).
+
 ## [1.4.0] - 2022-04-10
 
 ### Changed
